@@ -76,9 +76,10 @@ export default {
     login () {
       // 校验整个表单的规则
       // validate 是一个方法 => 方法中传入的一个函数 两个校验参数  是否校验成功/未校验成功的字段
-      this.$refs.myForm.validate(function (isOK) {
+      this.$refs.myForm.validate((isOK) => {
         if (isOK) {
           console.log('校验成功')
+          this.submitLogin()
         }
       })
     },
