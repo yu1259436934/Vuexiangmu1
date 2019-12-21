@@ -81,6 +81,23 @@ export default {
           console.log('校验成功')
         }
       })
+    },
+    submitLogin () {
+      this.$axios({
+        url: '/authorizations', // 请求地址 axios 没有指定 类型 默认走get类型
+        method: 'post', // 类型
+        data: this.loginForm // body 参数
+      }).then(result => {
+        // 只接受正确结果
+        // 前端缓存 登录成功返回给我们的令牌
+        window.localStorage.setItem('user-token', result.data.data.token)
+        this.$router.push('/home') // 跳转到home页
+      }).catch(() => {
+        this.$message({
+          type: 'warning',
+          message: '手机号或验证码错误！'
+        })
+      })
     }
   }
 }
