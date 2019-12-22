@@ -7,11 +7,11 @@
      </el-col>
      <el-col class='right' :span="12">
          <el-row type='flex' justify="end" align="middle">
-             <img src="../../assets/img/header.jpg" alt="">
+             <img :src="userInfo.photo ? userInfo.photo:defaultImg" alt="">
              <!-- 下拉菜单 -->
              <el-dropdown>
                  <!-- 匿名插槽  下拉菜单显示的元素内容 -->
-                 <span>飞舞清扬</span>
+                 <span>{{ userInfo.name }}</span>
                  <el-dropdown-menu slot="dropdown">
                      <el-dropdown-item>个人信息</el-dropdown-item>
                      <el-dropdown-item>git地址</el-dropdown-item>
@@ -26,7 +26,23 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      userInfo: {}, // 定义一个用户对象
+      defaultImg: require('../../assets/img/header.jpg')// 将图片转化为变量
+    }
+  },
+  created () {
+    let token = localStorage.getItem('user-token')// 获取用户令牌
+    this.$axios({
+      url: '/user/profile',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(result => {
+      this.userInfo = result.data.data
+    })
+  }
 }
 </script>
 
