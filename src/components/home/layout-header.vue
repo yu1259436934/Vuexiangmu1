@@ -64,8 +64,9 @@ export default {
     span{
       color: #2c3e50;
       font-size: 16px;
-      margin-left: 4px;
+       margin-left: 4px;
     }
+
   }
   .right{
     img{
