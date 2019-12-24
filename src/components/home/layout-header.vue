@@ -25,6 +25,7 @@
 </template>
 
 <script>
+// import { log } from 'util'
 export default {
   data () {
     return {
@@ -36,7 +37,9 @@ export default {
     this.$axios({
       url: '/user/profile'
     }).then(result => {
-      this.userInfo = result.data.data
+      // debugger
+      this.userInfo = result.data
+      // console.log(this.userInfo)
     })
   },
   methods: {
